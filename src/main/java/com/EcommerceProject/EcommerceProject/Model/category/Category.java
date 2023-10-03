@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,8 +25,4 @@ public class Category {
      private int id;
      private String type;
 
-     @ManyToOne
-     @JoinColumn(name="product_id")
-     @JsonIgnore
-     private Product product;
 }

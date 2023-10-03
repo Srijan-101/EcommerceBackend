@@ -37,8 +37,11 @@ public class CategoryController {
     }
 
     @GetMapping("/getAll")
-    public List<Category> getCategory(){
-        return categoryService.getAllCategory();
+    public ResponseEntity<Object> getCategory(){
+        return ResponseEntity.ok(
+                new ApiResponse(true,
+                        "Category fetched sucessfully!",
+                        categoryService.getAllCategory()));
     }
 
 }

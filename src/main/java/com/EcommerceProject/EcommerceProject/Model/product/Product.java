@@ -1,6 +1,7 @@
 package com.EcommerceProject.EcommerceProject.Model.product;
 
 import com.EcommerceProject.EcommerceProject.Model.category.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,9 +25,8 @@ public class Product {
     private boolean availability = true;
     private String description;
 
-    @OneToOne
+    @ManyToOne()
     @JoinColumn(name="category_id")
-
     @NotNull(message = "Please select category")
     private Category category;
 }

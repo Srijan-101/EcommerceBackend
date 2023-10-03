@@ -2,17 +2,17 @@ package com.EcommerceProject.EcommerceProject.Service.product;
 
 
 import com.EcommerceProject.EcommerceProject.Model.product.Product;
-import com.EcommerceProject.EcommerceProject.dto.ProductDTO;
+import com.EcommerceProject.EcommerceProject.dto.ProductRequestDto;
 
 import java.util.List;
 
 
 public interface ProductService {
 
-      String saveProductDetails(ProductDTO product);
+      String saveProductDetails(ProductRequestDto product);
       String DeleteProductDetails(Integer product_id);
 
-      String updateProductDetails(ProductDTO productDTO);
+      String updateProductDetails(ProductRequestDto productDTO);
 
       List<Product> getProductByCategory(Integer category_id);
       List<Product>  getProductByAvailability(Boolean status);

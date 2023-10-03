@@ -3,7 +3,7 @@ package com.EcommerceProject.EcommerceProject.Controller;
 
 import com.EcommerceProject.EcommerceProject.Model.product.Product;
 import com.EcommerceProject.EcommerceProject.Service.product.ProductService;
-import com.EcommerceProject.EcommerceProject.dto.ProductDTO;
+import com.EcommerceProject.EcommerceProject.dto.ProductRequestDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class ProductController {
     }
 
     @PostMapping("/saveProduct")
-    public String saveProduct(@RequestBody ProductDTO productDTO){
+    public String saveProduct(@RequestBody ProductRequestDto productDTO){
         return productService.saveProductDetails(productDTO);
     }
 
@@ -37,7 +37,7 @@ public class ProductController {
     }
 
     @PutMapping("/updateProduct")
-    public String DeleteProduct(@RequestBody ProductDTO productDTO ){
+    public String DeleteProduct(@RequestBody ProductRequestDto productDTO ){
          return productService.updateProductDetails(productDTO);
     }
     @GetMapping("/GetProductById/{id}")

@@ -5,7 +5,7 @@ import com.EcommerceProject.EcommerceProject.Model.category.Category;
 import com.EcommerceProject.EcommerceProject.Model.product.Product;
 import com.EcommerceProject.EcommerceProject.Repository.CategoryRepository;
 import com.EcommerceProject.EcommerceProject.Repository.ProductRepository;
-import com.EcommerceProject.EcommerceProject.dto.ProductDTO;
+import com.EcommerceProject.EcommerceProject.dto.ProductRequestDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class ProductServiceImp implements ProductService{
     }
 
     @Override
-    public String saveProductDetails(ProductDTO productDTO) {
+    public String saveProductDetails(ProductRequestDto productDTO) {
 
          Category existingCategory = categoryRepository
                  .getCategoryById(productDTO.getCategory_id());
@@ -50,7 +50,7 @@ public class ProductServiceImp implements ProductService{
     }
 
     @Override
-    public String updateProductDetails(ProductDTO productDTO) {
+    public String updateProductDetails(ProductRequestDto productDTO) {
 
         Product existingProduct = productrepository.findProductById(productDTO.getId());
         if(existingProduct != null){
