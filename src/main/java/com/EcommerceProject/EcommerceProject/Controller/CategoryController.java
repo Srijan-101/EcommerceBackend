@@ -3,6 +3,8 @@ package com.EcommerceProject.EcommerceProject.Controller;
 
 import com.EcommerceProject.EcommerceProject.Model.category.Category;
 import com.EcommerceProject.EcommerceProject.Service.category.CategoryService;
+import com.EcommerceProject.EcommerceProject.dto.ApiResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +18,13 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public String createCategory(@RequestBody Category category){
-       return categoryService.createCategory(category);
+    public ResponseEntity<Object> createCategory(@RequestBody Category category){
+        return ResponseEntity.ok(
+                new ApiResponse(true,
+                        "Category created sucessfully!",
+                        categoryService.createCategory(category)));
     }
+
 
 //    @PutMapping ("/update")
 //    public String updateCategory(@RequestBody Category category){

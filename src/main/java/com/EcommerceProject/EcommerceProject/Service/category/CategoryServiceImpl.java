@@ -1,8 +1,10 @@
 package com.EcommerceProject.EcommerceProject.Service.category;
 
 
+import com.EcommerceProject.EcommerceProject.Exception.AppException;
 import com.EcommerceProject.EcommerceProject.Model.category.Category;
 import com.EcommerceProject.EcommerceProject.Repository.CategoryRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
             categoryrepository.save(category);
             return "Category created successfully";
         } else  {
-            return "Category with the same name already exists";
+           throw new AppException("Category with same name already exists",HttpStatus.BAD_REQUEST);
         }
     }
 }
