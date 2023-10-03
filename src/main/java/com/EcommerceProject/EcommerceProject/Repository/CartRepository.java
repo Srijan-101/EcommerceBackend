@@ -1,4 +1,4 @@
 package com.EcommerceProject.EcommerceProject.Repository;
 
-public class CartRepository {
+public interface CartRepository {
 }

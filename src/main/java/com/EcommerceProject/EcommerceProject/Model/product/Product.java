@@ -1,15 +1,11 @@
 package com.EcommerceProject.EcommerceProject.Model.product;
 
 import com.EcommerceProject.EcommerceProject.Model.category.Category;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @AllArgsConstructor
@@ -19,12 +15,18 @@ import javax.persistence.OneToOne;
 @Entity
 public class Product {
     @Id
+    @Column(name="product_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String name;
-    private boolean availability;
+    private Double price;
+
+    private boolean availability = true;
     private String description;
 
     @OneToOne
     @JoinColumn(name="category_id")
+
+    @NotNull(message = "Please select category")
     private Category category;
 }
