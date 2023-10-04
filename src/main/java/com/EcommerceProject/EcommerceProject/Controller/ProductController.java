@@ -3,6 +3,7 @@ package com.EcommerceProject.EcommerceProject.Controller;
 
 import com.EcommerceProject.EcommerceProject.Model.product.Product;
 import com.EcommerceProject.EcommerceProject.Service.product.ProductService;
+import com.EcommerceProject.EcommerceProject.dto.CategoryResponseDto;
 import com.EcommerceProject.EcommerceProject.dto.ProductRequestDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class ProductController {
     }
 
     @GetMapping("/findByCategory/{id}")
-    public List<Product> findProductByCategoryId(@PathVariable Integer id){
+    public CategoryResponseDto findProductByCategoryId(@PathVariable Integer id){
         return productService.getProductByCategory(id);
     }
 

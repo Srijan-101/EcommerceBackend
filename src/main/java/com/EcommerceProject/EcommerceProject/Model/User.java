@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 
@@ -17,15 +18,14 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="id",nullable = false)
+    @Column(name="user_id",nullable = false)
     private Integer id;
     private String firstName;
     private String lastName;
     private String password;
+
     private String email;
     private String role;
-
-    private String phoneNo;
 
 
 }

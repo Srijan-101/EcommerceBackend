@@ -2,6 +2,7 @@ package com.EcommerceProject.EcommerceProject.Repository;
 
 import com.EcommerceProject.EcommerceProject.Model.category.Category;
 import com.EcommerceProject.EcommerceProject.Model.product.Product;
+import com.EcommerceProject.EcommerceProject.dto.CategoryResponseDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

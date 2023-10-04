@@ -17,23 +17,24 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-
+@Table(name = "order_table")
 public class Order {
 
      @Id
+     @Column(name="order_id")
      @GeneratedValue(strategy = GenerationType.SEQUENCE)
-
-     @Column(name="Order_id")
      private int id;
+
      private String Status;
      private LocalDate OrderDate;
      private String Location;
 
      @ManyToOne()
+     @JoinColumn(name="user_id")
      private User user;
 
      @OneToMany()
+     @JoinColumn(name="product_id")
      private List<Product> productList;
 
 }

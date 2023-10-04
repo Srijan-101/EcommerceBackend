@@ -5,9 +5,11 @@ import com.EcommerceProject.EcommerceProject.Model.category.Category;
 import com.EcommerceProject.EcommerceProject.Model.product.Product;
 import com.EcommerceProject.EcommerceProject.Repository.CategoryRepository;
 import com.EcommerceProject.EcommerceProject.Repository.ProductRepository;
+import com.EcommerceProject.EcommerceProject.dto.CategoryResponseDto;
 import com.EcommerceProject.EcommerceProject.dto.ProductRequestDto;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -69,8 +71,31 @@ public class ProductServiceImp implements ProductService{
     }
 
     @Override
-    public List<Product> getProductByCategory(Integer category_id) {
-        return productrepository.findProductByCategoryId(category_id);
+    public CategoryResponseDto getProductByCategory(Integer category_id) {
+
+        List<Product> products = productrepository.findProductByCategoryId(category_id);
+        CategoryResponseDto categoryResponseDto = new CategoryResponseDto();
+
+        if(products != null){
+            categoryResponseDto.setId(products.get(0).getCategory().getId());
+            categoryResponseDto.setType(products.get(0).getCategory().getType());
+            List<Product> productList = new ArrayList<>();
+
+            for(Product product : products){
+                 Product ProductObj = new Product();
+
+                 ProductObj.setId(product.getId());
+                 ProductObj.setName(product.getName());
+                 ProductObj.setPrice(product.getPrice());
+                 ProductObj.setAvailability(product.isAvailability());
+                 ProductObj.setDescription(product.getDescription());
+
+                 productList.add(ProductObj);
+            }
+
+            categoryResponseDto.setProductList(productList);
+        }
+      return categoryResponseDto;
     }
 
     @Override

@@ -1,4 +1,8 @@
 package com.EcommerceProject.EcommerceProject.Repository;
 
-public interface CartRepository {
+import com.EcommerceProject.EcommerceProject.Model.cart.Cart;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CartRepository extends JpaRepository<Cart,Integer> {
+
 }

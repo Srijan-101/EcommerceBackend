@@ -29,4 +29,6 @@ public class Product {
     @JoinColumn(name="category_id")
     @NotNull(message = "Please select category")
     private Category category;
+
+
 }
