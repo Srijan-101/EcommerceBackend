@@ -25,6 +25,6 @@ public class Cart {
      private User user;
 
      @OneToMany()
-     @JoinColumn(name="product_id")
      private List<Product> productList;
+
 }

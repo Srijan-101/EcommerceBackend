@@ -30,11 +30,10 @@ public class Order {
      private String Location;
 
      @ManyToOne()
-     @JoinColumn(name="user_id")
+     @JoinColumn(name = "user_id")
      private User user;
 
      @OneToMany()
-     @JoinColumn(name="product_id")
      private List<Product> productList;
 
 }

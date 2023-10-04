@@ -4,6 +4,7 @@ import com.EcommerceProject.EcommerceProject.Enums.UserRole;
 import com.EcommerceProject.EcommerceProject.Exception.AppException;
 import com.EcommerceProject.EcommerceProject.Model.User;
 import com.EcommerceProject.EcommerceProject.Repository.UserRepository;
+import com.EcommerceProject.EcommerceProject.Security.PasswordEncoderService;
 import com.EcommerceProject.EcommerceProject.dto.UserDto.UserSignUpRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImp  implements  UserService{
 
     private final UserRepository userRepository;
+    private final PasswordEncoderService passwordEncoderService;
     @Override
     public User addNewUser(UserSignUpRequest user) {
        if(userRepository.getUserByEmail(user.getEmail()) != null){
@@ -25,7 +27,12 @@ public class UserServiceImp  implements  UserService{
        newUser.setFirstName(user.getFirstName());
        newUser.setLastName(user.getLastName());
        newUser.setEmail(user.getEmail());
-       newUser.setPassword(user.getPassword());
+
+       String encryptedPassword = passwordEncoderService
+               .getPasswordEncoder()
+               .encode(user.getPassword());
+
+       newUser.setPassword(encryptedPassword );
 
         if(user.getRoleId() == 1){
             newUser.setRole(String.valueOf(UserRole.ADMIN));
@@ -36,7 +43,6 @@ public class UserServiceImp  implements  UserService{
         else {
             throw new AppException("Invalid Role. Please try again", HttpStatus.BAD_REQUEST);
         }
-
         userRepository.saveAndFlush(newUser);
         return newUser;
     }
