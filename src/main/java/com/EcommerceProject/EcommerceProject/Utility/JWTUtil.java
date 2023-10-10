@@ -1,10 +1,12 @@
 package com.EcommerceProject.EcommerceProject.Utility;
 
 
+import com.EcommerceProject.EcommerceProject.Exception.AppException;
 import com.EcommerceProject.EcommerceProject.Repository.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
@@ -45,13 +47,13 @@ public class JWTUtil {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException ex) {
-            System.out.println("Invalid JWT token");
+             throw new AppException("Invalid JWT token", HttpStatus.BAD_REQUEST);
         } catch (ExpiredJwtException ex) {
-            System.out.println("Expired JWT token");
+             System.out.println("Expired JWT token");
         } catch (UnsupportedJwtException ex) {
-            System.out.println("Unsupported JWT token");
+             System.out.println("Unsupported JWT token");
         } catch (IllegalArgumentException ex) {
-            System.out.println("JWT claims string is empty.");
+             System.out.println("JWT claims string is empty.");
         }
         return false;
     }
