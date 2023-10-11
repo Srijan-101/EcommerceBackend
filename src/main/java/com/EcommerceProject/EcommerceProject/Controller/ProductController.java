@@ -3,10 +3,14 @@ package com.EcommerceProject.EcommerceProject.Controller;
 
 import com.EcommerceProject.EcommerceProject.Model.product.Product;
 import com.EcommerceProject.EcommerceProject.Service.product.ProductService;
+import com.EcommerceProject.EcommerceProject.dto.ApiResponse;
 import com.EcommerceProject.EcommerceProject.dto.CategoryResponseDto;
 import com.EcommerceProject.EcommerceProject.dto.ProductRequestDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,8 +27,12 @@ public class ProductController {
     }
 
     @PostMapping("/saveProduct")
-    public String saveProduct(@RequestBody ProductRequestDto productDTO){
-        return productService.saveProductDetails(productDTO);
+    public  ResponseEntity<ApiResponse> saveProduct(@RequestBody @Valid ProductRequestDto productDTO){
+        return ResponseEntity.ok(
+                new ApiResponse(true,
+                        "sucessfully fetched!",
+                        productService.saveProductDetails(productDTO)));
+
     }
 
     @GetMapping("/findByCategory/{id}")

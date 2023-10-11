@@ -34,7 +34,7 @@ public class Order {
      @JoinColumn(name = "user_id")
      private User user;
 
-     @OneToMany(cascade = CascadeType.PERSIST)
+     @ManyToMany()
      private List<Product> productList;
 
 }

@@ -9,6 +9,7 @@ import com.EcommerceProject.EcommerceProject.dto.CategoryResponseDto;
 import com.EcommerceProject.EcommerceProject.dto.ProductRequestDto;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,23 +53,27 @@ public class ProductServiceImp implements ProductService{
     }
 
     @Override
+    @Transactional
     public String updateProductDetails(ProductRequestDto productDTO) {
-
         Product existingProduct = productrepository.findProductById(productDTO.getId());
-        if(existingProduct != null){
-            Category existingCategory = categoryRepository
-                    .getCategoryById(productDTO.getCategory_id());
-            if(existingCategory !=null ){
-                 existingProduct.setName(productDTO.getName());
-                 existingProduct.setDescription(productDTO.getDescription());
-                 existingProduct.setPrice(productDTO.getPrice());
-                 existingProduct.setCategory(existingCategory);
-                 existingProduct.setAvailability(productDTO.isAvailability());
-                 productrepository.save(existingProduct);
-            }
+        if (existingProduct == null) {
+            return "Product not found";
         }
+        Category existingCategory = categoryRepository.getCategoryById(productDTO.getCategory_id());
+
+        if (existingCategory == null) {
+            return "Category not found";
+        }
+
+        existingProduct.setName(productDTO.getName());
+        existingProduct.setDescription(productDTO.getDescription());
+        existingProduct.setPrice(productDTO.getPrice());
+        existingProduct.setCategory(existingCategory);
+        existingProduct.setAvailability(productDTO.isAvailability());
+        productrepository.saveAndFlush(existingProduct);
         return "Product updated successfully";
     }
+
 
     @Override
     public CategoryResponseDto getProductByCategory(Integer category_id) {

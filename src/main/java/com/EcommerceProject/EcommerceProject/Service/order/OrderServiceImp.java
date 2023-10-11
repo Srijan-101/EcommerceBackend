@@ -8,6 +8,7 @@ import com.EcommerceProject.EcommerceProject.Repository.OrderRepository;
 import com.EcommerceProject.EcommerceProject.Repository.ProductRepository;
 import com.EcommerceProject.EcommerceProject.Repository.UserRepository;
 import com.EcommerceProject.EcommerceProject.dto.OrderRequestDto;
+import com.EcommerceProject.EcommerceProject.dto.ProductStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -74,5 +75,15 @@ public class OrderServiceImp  implements  OrderService{
          return  orderRepo.getOrderByUserId(id);
     }
 
-
+    @Override
+    public String updateOrder(ProductStatus productStatus) {
+        Order order = orderRepo.getOrderById(productStatus.getOrder_id());
+        if (order != null) {
+            order.setStatus(productStatus.getStatus());
+            orderRepo.save(order);
+            return "Order status updated successfully";
+        } else {
+            return "Order not found";
+        }
+    }
 }
