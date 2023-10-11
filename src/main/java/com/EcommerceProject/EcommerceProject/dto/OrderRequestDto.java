@@ -27,6 +27,7 @@ public class OrderRequestDto {
     @Size(min = 9, message = "Invalid phone number!")
     private String phoneNumber;
 
+
     private String status = "ORDER_PLACED";
     private List<ProductQuantity> ProductList = new ArrayList<>();
 }

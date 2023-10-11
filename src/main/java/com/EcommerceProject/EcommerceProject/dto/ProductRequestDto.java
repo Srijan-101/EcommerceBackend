@@ -22,6 +22,10 @@ public class ProductRequestDto {
     @Min(value = 1, message = "Price must be at least 1")
     private Double price;
     private boolean availability = true;
+
+    @NotBlank(message = "Image is required!")
+    private String Imageurl;
+
     private String description;
 
     @NotNull(message = "Category cannot be null")

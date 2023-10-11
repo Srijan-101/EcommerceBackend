@@ -27,6 +27,8 @@ public class Product {
     private boolean availability = true;
     private String description;
 
+    private String Imageurl;
+
     private Integer quantity;
 
     @ManyToOne()
