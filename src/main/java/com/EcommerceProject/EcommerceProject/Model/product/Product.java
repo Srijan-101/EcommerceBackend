@@ -27,6 +27,8 @@ public class Product {
     private boolean availability = true;
     private String description;
 
+    private Integer quantity;
+
     @ManyToOne()
     @JoinColumn(name="category_id")
     @NotNull(message = "Please select category")

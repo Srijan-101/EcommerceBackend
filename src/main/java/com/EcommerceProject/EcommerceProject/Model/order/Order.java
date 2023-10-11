@@ -28,12 +28,13 @@ public class Order {
      private String Status;
      private LocalDate OrderDate;
      private String Location;
+     private String Phone;
 
      @ManyToOne()
      @JoinColumn(name = "user_id")
      private User user;
 
-     @OneToMany()
+     @OneToMany(cascade = CascadeType.PERSIST)
      private List<Product> productList;
 
 }

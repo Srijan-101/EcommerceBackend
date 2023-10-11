@@ -41,6 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/user/SignUp").permitAll()
                 .antMatchers("/api/user/Login").permitAll()
                 .antMatchers("/api/category/getAll").permitAll()
+                .antMatchers("/api/order/placeOrder").permitAll()
+                .antMatchers("/api/order/GetAll").permitAll()
+                .antMatchers("/api/product/findByCategory/**").permitAll()
                 .antMatchers("/api/product/getProduct").permitAll()
                 .antMatchers("/api/category/save").hasAnyAuthority("ADMIN")
                 .antMatchers("/api/product/saveProduct").hasAnyAuthority("ADMIN")
@@ -51,7 +54,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

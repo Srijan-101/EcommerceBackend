@@ -72,30 +72,18 @@ public class ProductServiceImp implements ProductService{
 
     @Override
     public CategoryResponseDto getProductByCategory(Integer category_id) {
-
         List<Product> products = productrepository.findProductByCategoryId(category_id);
         CategoryResponseDto categoryResponseDto = new CategoryResponseDto();
 
-        if(products != null){
-            categoryResponseDto.setId(products.get(0).getCategory().getId());
-            categoryResponseDto.setType(products.get(0).getCategory().getType());
-            List<Product> productList = new ArrayList<>();
+        if (!products.isEmpty()) {
+            Product firstProduct = products.get(0);
+            categoryResponseDto.setId(firstProduct.getCategory().getId());
+            categoryResponseDto.setType(firstProduct.getCategory().getType());
 
-            for(Product product : products){
-                 Product ProductObj = new Product();
-
-                 ProductObj.setId(product.getId());
-                 ProductObj.setName(product.getName());
-                 ProductObj.setPrice(product.getPrice());
-                 ProductObj.setAvailability(product.isAvailability());
-                 ProductObj.setDescription(product.getDescription());
-
-                 productList.add(ProductObj);
-            }
-
-            categoryResponseDto.setProductList(productList);
+            categoryResponseDto.setProductList(products);
         }
-      return categoryResponseDto;
+
+        return categoryResponseDto;
     }
 
     @Override
