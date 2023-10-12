@@ -14,8 +14,7 @@ public class ProductRequestDto {
     private Integer id;
 
     @NotBlank(message = "Product name is required.")
-    @Size(min = 4, message = "Product name should contain atleast 2 letters.")
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "Product name should only contain alphabetic characters.")
+    @Size(min = 4, message = "Product name should contain atleast 4 letters.")
     private String name;
 
     @NotNull(message = "Price cannot be null")
